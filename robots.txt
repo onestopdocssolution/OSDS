@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://onestopdocssolution.github.io/OSDS/sitemap.xml
