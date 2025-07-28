@@ -2,15 +2,6 @@
 
 <html lang="en" class="dark">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1CE8WK13Z6"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-1CE8WK13Z6');
-</script>
   
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,7 +19,7 @@
   <!-- Open Graph / Social sharing -->
   <meta property="og:title" content="OneStopDocs – Professional Document Services" />
   <meta property="og:description" content="Your Trusted Partner for Hassle-Free Documentation. Let Us Simplify the Process for You...!" />
-  <meta property="og:image" content="https://onestopdocssolution.github.io/OSDS/thumbnail.webp" />
+  <meta property="og:image" content="https://onestopdocssolution.github.io/OSDS/thumbnail.jpg" />
   <meta property="og:url" content="https://onestopdocssolution.github.io/OSDS/" />
   <meta property="og:type" content="website" />
 
@@ -347,40 +338,69 @@
       background: #f9f9f9;
     }
 
-    /* Hamburger Button */
-    .hamburger {
-      position: fixed;
-      top: 25px;
-      left: 20px;
-      width: 25px;
-      height: 3px;
-      background: #4a90e2;
-      cursor: pointer;
-      z-index: 1200;
-      transition: background 0.3s ease;
-    }
-    .hamburger::before,
-    .hamburger::after {
-      content: "";
-      position: absolute;
-      width: 25px;
-      height: 3px;
-      background: #4a90e2;
-      transition: all 0.3s ease;
-    }
-    .hamburger::before {
-      transform: translateY(-10px);
-    }
-    .hamburger::after {
-      transform: translateY(10px);
-    }
+/* Hamburger Button */
+.hamburger {
+  position: fixed;
+  top: 25px;
+  left: 20px;
+  width: 25px;
+  height: 3px;
+  background: #4a90e2;
+  cursor: pointer;
+  z-index: 1200;
+  transition: background 0.3s ease;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 3px;
+  background: #4a90e2;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before {
+  transform: translateY(-10px);
+}
+
+.hamburger::after {
+  transform: translateY(10px);
+}
+/* When menu is active: convert to X */
+.hamburger.active {
+  background: transparent;
+}
+
+.hamburger.active::before {
+  transform: rotate(45deg);
+}
+
+.hamburger.active::after {
+  transform: rotate(-45deg);
+}
+
+/* Animation keyframes */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
 
 /* Side Menu – Frosted Glass Blur Version */
 .side-menu {
   position: fixed;
   top: 0;
   left: -100%;
-  width: 260px;
+  width: 280px;
   height: 100%;
   background: rgba(255, 255, 255, 0.25); /* semi-transparent white */
   backdrop-filter: blur(18px); /* DSLR-like blur */
@@ -415,7 +435,7 @@
   position: fixed;
   top: 0;
   left: -100%;
-  width: 260px;
+  width: 280px;
   height: 100%;
   background: rgba(245, 245, 245, 0.65); /* slightly darker, better contrast */
   backdrop-filter: blur(22px) saturate(150%);
@@ -467,6 +487,26 @@
       animation: fadeIn 0.5s ease forwards;
       opacity: 0;
     }
+    @keyframes textPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+}
+
+.pulse-side-menu {
+  animation: slideIn 0.5s ease forwards, textPulse 2.5s ease-in-out infinite;
+  display: inline-block;
+}
+ /* Required for transform to apply properly */
+}
+
+    
+    
     .side-menu.active .side-menu-content {
       opacity: 1;
     }
@@ -478,7 +518,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      animation: slideIn 0.5s ease forwards;
       opacity: 0;
     }
     .side-menu.active h2 {
@@ -583,16 +622,18 @@
     
     
   </style></head>
-<body><div class="hamburger" id="hamburger"></div><div class="overlay" id="overlay"></div><div class="side-menu" id="sideMenu">
+<body><div id="hamburger" class="hamburger" onclick="toggleMenu()"></div>
+<div class="overlay" id="overlay"></div>
+<div class="side-menu" id="sideMenu">
 <!-- Close Button inside the drawer -->
 
 <div class="side-menu-content">
-<h2 id="mainTitle" onclick="toggleMainMenu()" style="margin-top: 15px;">
+<h2 id="mainTitle" class="pulse-side-menu" onclick="toggleMainMenu()" style="margin-top: 15px;">
   Required Documents <span class="arrow">➤</span>
 </h2>
 
 <ul id="mainMenu">
-<li onclick="toggleSubmenu(event, 'pan')">PAN Application &amp; Related </li>
+<li onclick="toggleSubmenu(event, 'pan')">PAN Application &amp; Related <strong>(Tap)</strong></li>
 <ul class="submenu" id="pan">
 <h4>Required Documents</h4>
 <ol>
@@ -601,7 +642,7 @@
 </ol>
 
 </ul>
-<li onclick="toggleSubmenu(event, 'labour')">Labour &amp; Employment Card</li>
+<li onclick="toggleSubmenu(event, 'labour')">Labour &amp; Employment Card <strong>(Tap)</strong></li>
 <ul class="submenu" id="labour">
   <h4>Required Documents</h4>
   <ol>
@@ -611,7 +652,7 @@
 </ul>
 
 <!--Begin with Passport Section-->
-<li onclick="toggleSubmenu(event, 'Passport')">Passport Application Assistance</li>
+<li onclick="toggleSubmenu(event, 'Passport')">Passport Application Assistance <strong>(Tap)</strong></li>
 <ul class="submenu" id="Passport">
   <h4>Required Documents</h4>
   <ol>
@@ -713,7 +754,7 @@
 </script>
 <!--End of collapsible Optional docs of Passport-->
 
-<li onclick="toggleSubmenu(event, 'residence')">Residence Certificate &amp; Renewal</li>
+<li onclick="toggleSubmenu(event, 'residence')">Residence Certificate &amp; Renewal <strong>(Tap)</strong></li>
 <ul class="submenu" id="residence">
   <h4>Required Documents</h4>
   <ol>
@@ -722,7 +763,7 @@
 </ol>
 </ul>
 
-<li onclick="toggleSubmenu(event, 'Divergence')">Divergence Certificate &amp; Related</li>
+<li onclick="toggleSubmenu(event, 'Divergence')">Divergence Certificate &amp; Related <strong>(Tap)</strong></li>
 <ul class="submenu" id="Divergence">
   <h4>Required Documents</h4>
   <ol>
@@ -731,7 +772,7 @@
   </ol>
 </ul>
 
-<li onclick="toggleSubmenu(event, 'Police Clearance')" >Police Clearance Certificate</li>
+<li onclick="toggleSubmenu(event, 'Police Clearance')" >Police Clearance Certificate <strong>(Tap)</strong></li>
 <ul class="submenu" id="Police Clearance">
   <h4>Required Documents</h4>
   <ol>
@@ -739,7 +780,7 @@
 </ol>
 </ul>
 
-<li onclick="toggleSubmenu(event, 'PF')" >PF Related Assistance</li>
+<li onclick="toggleSubmenu(event, 'PF')" >PF Related Assistance <strong>(Tap)</strong></li>
 <ul class="submenu" id="PF">
   <h4>Required Documents</h4>
   <ol>
@@ -748,7 +789,7 @@
 </ol>
 </ul>
 
-<li onclick="toggleSubmenu(event, 'Domicile')">Domicile Certificate Assistance</li>
+<li onclick="toggleSubmenu(event, 'Domicile')">Domicile Certificate Assistance <strong>(Tap)</strong></li>
 <ul class="submenu" id="Domicile">
 <h4>Required Documents</h4>
 <ol>
@@ -1070,7 +1111,15 @@ function closeContactPopup() {
     We proudly serve all over Goa – Panaji, Mapusa, Margao, Vasco, Bicholim – and across India!<br/>
     <strong>Search terms:</strong> PAN correction Goa, Aadhar update, EPF help, tax filing near me, document services India, form 14 assistance, domicile certificate Goa, pcc support, Digilocker help.
   </p>
+  <div class="bottom-spacer"></div>
+
 </section>
+<style>
+  .bottom-spacer {
+  height: 48px; /* Equal to or slightly more than .contact-slim height */
+}
+
+</style>
 </body>
   </html>
   
